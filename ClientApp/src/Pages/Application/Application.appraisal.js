@@ -369,47 +369,7 @@ const fieldTemplate = [
     ],
   },
   {
-    label: "ตรวจจาก",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
     label: "อื่นๆ",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "ตั้งอยู่บนถนน",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "แยกเข้าซอย",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "ระยะทาง(เมตร)",
     child: [
       {
         name: "deedNo",
@@ -422,19 +382,16 @@ const fieldTemplate = [
     label: "สภาพที่ดิน",
     child: [
       {
+        label: "สภาพที่ดิน",
         name: "deedNo",
-        col: 2,
-        render: formInput,
+        col: 1,
+        render: formDropdownLabel,
       },
-    ],
-  },
-  {
-    label: "ระดับดิน(ซม.)",
-    child: [
       {
+        label: "ระดับดิน(ซม.)",
         name: "deedNo",
-        col: 2,
-        render: formInput,
+        col: 1,
+        render: formInputLabel,
       },
     ],
   },
@@ -500,11 +457,45 @@ const fieldTemplate = [
   },
   {
     label: "ถนนผ่านหน้าที่ดิน",
+    row: 3,
     child: [
       {
+        label: "ถนนผ่านหน้าที่ดิน",
         name: "deedNo",
         col: 2,
-        render: formInput,
+        render: formDropdownLabel,
+      },
+      {
+        label: "ผิวจราจร(เมตร)",
+        name: "deedNo",
+        col: 2,
+        render: formInputLabel,
+      },
+      {
+        label: "เขตทาง(เมตร)",
+        name: "deedNo",
+        col: 2,
+        render: formInputLabel,
+      },
+      {
+        label: "รถยนต์เข้า-ออก",
+        name: "deedNo",
+        col: 2,
+        render: formDropdownLabel,
+      },
+      {
+        label: "ทางเข้า-ออก",
+
+        name: "deedNo",
+        col: 2,
+        render: formInputLabel,
+      },
+      {
+        label: "ต้องมีการปรับปรุงสภาพทาง",
+
+        name: "deedNo",
+        col: 2,
+        render: formInputLabel,
       },
     ],
   },
@@ -514,60 +505,11 @@ const fieldTemplate = [
       {
         name: "deedNo",
         col: 2,
-        render: formInput,
+        render: formDropdownLabel,
       },
     ],
   },
-  {
-    label: "ผิวจราจรกว้าง(เมตร)",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "เขตทาง(เมตร)",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "รถยนต์เข้า-ออก",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "ทางเข้า-ออก",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "ต้องมีการปรับปรุงสภาพทาง",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formInput,
-      },
-    ],
-  },
+
   {
     label: "ประเมินราคา",
     child: [
@@ -950,16 +892,13 @@ const ApplicationAppraisal = () => {
   return (
     <div className="bg-white p-10">
       <Formik
-        initialValues={{
-          name: "ffff",
-          email: "",
-        }}
+        initialValues={{}}
         validationSchema={RequiredSchema}
         onSubmit={(values) => {
           console.log(values);
         }}
         validateOnBlur={false}
-        validateOnChange={true}
+        validateOnChange={false}
       >
         {({ values, errors, touched }) => (
           <Form className="space-y-8 divide-y divide-gray-200">
