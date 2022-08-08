@@ -51,7 +51,7 @@ const Login = () => {
             </svg>
             <input
               type="text"
-              className="py-5 px-6 border-none outline-none text-sm placeholder:text-sm w-full min-w-[300px]"
+              className="py-5 px-6 border-none outline-none text-sm placeholder:text-sm w-full min-w-[300px] focus:border-none focus:ring-0"
               placeholder="Username"
               value={username}
               onChange={(event) => setUsername(event.currentTarget.value)}
@@ -74,7 +74,7 @@ const Login = () => {
             </svg>
             <input
               type={passwordType}
-              className="py-5 px-6 border-none outline-none text-sm placeholder:text-sm w-full min-w-[300px]"
+              className="py-5 px-6 border-none outline-none text-sm placeholder:text-sm w-full min-w-[300px] focus:ring-0"
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
@@ -122,4 +122,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export default Login;

@@ -1,9 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
+import Navbar from "./Navbar";
+import Sidebar from "../components/Sidebar";
 
-export class Layout extends Component {
-  static displayName = Layout.name;
+const Layout = ({ children }) => {
+  return (
+    <div className="flex">
+      {/* Sidebar */}
+      <div className="w-72 min-h-screen border border-gray-200 border-r ">
+        <Sidebar />
+      </div>
+      <div className="flex flex-col flex-1">
+        {/* <div className="relative z-50 h-16 bg-white  shadow-sm">Navbar</div> */}
+        <Navbar />
+        {/* Body */}
+        <div className="flex-1 bg-slate-100 p-10">{children}</div>
+      </div>
+    </div>
+  );
+};
 
-  render() {
-    return <div>{this.props.children}</div>;
-  }
-}
+export default Layout;
