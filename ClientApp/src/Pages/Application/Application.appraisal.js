@@ -214,7 +214,7 @@ const fieldTemplate = [
     label: "เลขที่โฉนด",
     child: [
       {
-        name: "deedNo",
+        name: "documentNo",
         col: 2,
         render: formInput,
       },
@@ -234,8 +234,19 @@ const fieldTemplate = [
     label: "ระวางรูปถ่ายทางอากาศชื่อ",
     child: [
       {
-        name: "deedNo",
+        name: "aerialPhoto",
         col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "เลขที่ดิน",
+    child: [
+      {
+        name: "landNo",
+        col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -244,7 +255,7 @@ const fieldTemplate = [
     label: "หมายเลข",
     child: [
       {
-        name: "deedNo",
+        name: "aerialPhotoNumber",
         col: 2,
         render: formInput,
       },
@@ -254,7 +265,7 @@ const fieldTemplate = [
     label: "แผ่นที่",
     child: [
       {
-        name: "deedNo",
+        name: "aerialPhotoPageNumber",
         col: 2,
         render: formInput,
       },
@@ -264,7 +275,7 @@ const fieldTemplate = [
     label: "ทะเบียนเลขที่",
     child: [
       {
-        name: "deedNo",
+        name: "registerNumber",
         col: 2,
         render: formInput,
       },
@@ -274,7 +285,7 @@ const fieldTemplate = [
     label: "เล่มที่",
     child: [
       {
-        name: "deedNo",
+        name: "bookNo",
         col: 2,
         render: formInput,
       },
@@ -284,7 +295,7 @@ const fieldTemplate = [
     label: "หน้าที่",
     child: [
       {
-        name: "deedNo",
+        name: "pageNo",
         col: 2,
         render: formInput,
       },
@@ -294,7 +305,7 @@ const fieldTemplate = [
     label: "หน้าสำรวจ",
     child: [
       {
-        name: "deedNo",
+        name: "surveySurface",
         col: 2,
         render: formInput,
       },
@@ -304,7 +315,7 @@ const fieldTemplate = [
     label: "ระวาง",
     child: [
       {
-        name: "deedNo",
+        name: "liable",
         col: 2,
         render: formInput,
       },
@@ -314,7 +325,7 @@ const fieldTemplate = [
     label: "เนื้อที่ดิน(ตารางวา)",
     child: [
       {
-        name: "deedNo",
+        name: "landSizeSqM",
         col: 2,
         render: formInput,
       },
@@ -326,7 +337,7 @@ const fieldTemplate = [
     child: [
       {
         label: "ตำแหน่งที่ดิน",
-        name: "position",
+        name: "landPosition",
         col: 2,
         items: [
           { value: null },
@@ -337,7 +348,7 @@ const fieldTemplate = [
       },
       {
         label: "ตรวจจาก",
-        name: "checkFrom",
+        name: "checkBy",
         col: 2,
         items: [
           { value: null },
@@ -349,14 +360,14 @@ const fieldTemplate = [
       },
       {
         label: "ตั้งอยู่บนถนน",
-        name: "road",
+        name: "street",
         col: 4,
         required: true,
         render: formInputLabel,
       },
       {
         label: "แยกเข้าซอย",
-        name: "soi",
+        name: "splitEntry",
         col: 3,
         render: formInputLabel,
       },
@@ -372,7 +383,7 @@ const fieldTemplate = [
     label: "อื่นๆ",
     child: [
       {
-        name: "deedNo",
+        name: "other",
         col: 2,
         render: formInput,
       },
@@ -383,13 +394,13 @@ const fieldTemplate = [
     child: [
       {
         label: "สภาพที่ดิน",
-        name: "deedNo",
+        name: "landCondition",
         col: 1,
         render: formDropdownLabel,
       },
       {
         label: "ระดับดิน(ซม.)",
-        name: "deedNo",
+        name: "avgLandReclamation",
         col: 1,
         render: formInputLabel,
       },
@@ -399,7 +410,7 @@ const fieldTemplate = [
     label: "ตำแหน่งพิกัดละติจูด",
     child: [
       {
-        name: "deedNo",
+        name: "positionLatitude",
         col: 2,
         render: formInput,
       },
@@ -409,7 +420,7 @@ const fieldTemplate = [
     label: "ตำแหน่งพิกัดลองติจูด",
     child: [
       {
-        name: "deedNo",
+        name: "positionLongtitude",
         col: 2,
         render: formInput,
       },
@@ -419,7 +430,7 @@ const fieldTemplate = [
     label: "สิ่งปลูกสร้าง",
     child: [
       {
-        name: "deedNo",
+        name: "withBuilding",
         col: 2,
         render: formInput,
       },
@@ -429,7 +440,7 @@ const fieldTemplate = [
     label: "กู้ประเภทอื่นๆ",
     child: [
       {
-        name: "deedNo",
+        name: "otherLoan",
         col: 2,
         render: formInput,
       },
@@ -439,7 +450,7 @@ const fieldTemplate = [
     label: "เนื้อที่บ่อน้ำ(ตารางวา)",
     child: [
       {
-        name: "deedNo",
+        name: "pondAreaPct",
         col: 2,
         render: formInput,
       },
@@ -449,7 +460,7 @@ const fieldTemplate = [
     label: "ความลึกโดยประมาณ(เมตร)",
     child: [
       {
-        name: "deedNo",
+        name: "pondDepthEstimation",
         col: 2,
         render: formInput,
       },
@@ -461,60 +472,53 @@ const fieldTemplate = [
     child: [
       {
         label: "ถนนผ่านหน้าที่ดิน",
-        name: "deedNo",
+        name: "roadToLand",
         col: 2,
         render: formDropdownLabel,
       },
       {
         label: "ผิวจราจร(เมตร)",
-        name: "deedNo",
+        name: "roadSurface",
+        col: 2,
+        render: formInputLabel,
+      },
+      {
+        label: "ผิวจราจรกว้าง(เมตร)",
+        name: "RoadSurfaceWidth",
         col: 2,
         render: formInputLabel,
       },
       {
         label: "เขตทาง(เมตร)",
-        name: "deedNo",
+        name: "pedestrianWay",
         col: 2,
         render: formInputLabel,
       },
       {
         label: "รถยนต์เข้า-ออก",
-        name: "deedNo",
+        name: "carAccess",
         col: 2,
         render: formDropdownLabel,
       },
       {
         label: "ทางเข้า-ออก",
-
-        name: "deedNo",
+        name: "entranceExit",
         col: 2,
         render: formInputLabel,
       },
       {
         label: "ต้องมีการปรับปรุงสภาพทาง",
-
-        name: "deedNo",
+        name: "entranceExitCondition",
         col: 2,
         render: formInputLabel,
       },
     ],
   },
   {
-    label: "ลักษณะผิวจราจร",
-    child: [
-      {
-        name: "deedNo",
-        col: 2,
-        render: formDropdownLabel,
-      },
-    ],
-  },
-
-  {
     label: "ประเมินราคา",
     child: [
       {
-        name: "deedNo",
+        name: "appraised",
         col: 2,
         render: formInput,
       },
@@ -524,7 +528,7 @@ const fieldTemplate = [
     label: "ลักษณะที่ดิน",
     child: [
       {
-        name: "deedNo",
+        name: "allocation",
         col: 2,
         render: formInput,
       },
@@ -534,7 +538,7 @@ const fieldTemplate = [
     label: "หมายเหตุไม่ประเมินราคาเนื่องจาก",
     child: [
       {
-        name: "deedNo",
+        name: "appraisedNote",
         col: 2,
         render: formInput,
       },
@@ -544,7 +548,7 @@ const fieldTemplate = [
     label: "เนื้อที่ถูกลุกล้ำ/ใช้เพื่อบุคคลอื่น(ตารางวา)",
     child: [
       {
-        name: "deedNo",
+        name: "spaceEncroached",
         col: 2,
         render: formInput,
       },
@@ -556,31 +560,31 @@ const fieldTemplate = [
     child: [
       {
         label: "ไฟฟ้าถนน",
-        name: "electricRoad",
+        name: "cbPublicUtility03",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "ไฟฟ้าถาวร",
-        name: "electric",
+        name: "cbPublicUtility01",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "ท่อระบายน้ำ/บ่อพัก",
-        name: "pipe",
+        name: "cbPublicUtility04",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "น้ำประปา/น้ำบาดาล",
-        name: "water",
+        name: "cbPublicUtility02",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "อื่นๆ",
-        name: "conditionOther",
+        name: "otherUtility",
         col: 4,
         render: formCheckboxWithDescription,
       },
@@ -590,7 +594,7 @@ const fieldTemplate = [
     label: "สโมสร",
     child: [
       {
-        name: "deedNo",
+        name: "club",
         col: 1,
         render: formDropdown,
       },
@@ -600,7 +604,7 @@ const fieldTemplate = [
     label: "ระบบรักษาความปลอดภัย",
     child: [
       {
-        name: "deedNo",
+        name: "securitySystem",
         col: 1,
         render: formDropdown,
       },
@@ -610,7 +614,7 @@ const fieldTemplate = [
     label: "สนามกีฬากลางแจ้ง",
     child: [
       {
-        name: "deedNo",
+        name: "stadium",
         col: 1,
         render: formDropdown,
       },
@@ -620,7 +624,7 @@ const fieldTemplate = [
     label: "ระบบคีย์การ์ด",
     child: [
       {
-        name: "deedNo",
+        name: "keyCardSystem",
         col: 1,
         render: formDropdown,
       },
@@ -630,7 +634,7 @@ const fieldTemplate = [
     label: "โรงเรียนอนุบาล",
     child: [
       {
-        name: "deedNo",
+        name: "kindergarten",
         col: 1,
         render: formDropdown,
       },
@@ -640,7 +644,7 @@ const fieldTemplate = [
     label: "ระบบการทิ้งและกำจัดขยะ",
     child: [
       {
-        name: "deedNo",
+        name: "wasteDisposalSystem",
         col: 1,
         render: formDropdown,
       },
@@ -650,7 +654,7 @@ const fieldTemplate = [
     label: "การพัฒนาในพื้นที่",
     child: [
       {
-        name: "deedNo",
+        name: "anyDevelopment",
         col: 1,
         render: formDropdown,
       },
@@ -660,7 +664,7 @@ const fieldTemplate = [
     label: "ข้อกำหนดผังเมือง",
     child: [
       {
-        name: "deedNo",
+        name: "townPlanReq",
         col: 1,
         render: formDropdown,
       },
@@ -670,7 +674,7 @@ const fieldTemplate = [
     label: "ลักษณะทางกายภาพ/รูปแปลง",
     child: [
       {
-        name: "deedNo",
+        name: "physicalReputation",
         col: 1,
         render: formDropdown,
       },
@@ -680,7 +684,7 @@ const fieldTemplate = [
     label: "ตำแหน่งที่ตั้ง",
     child: [
       {
-        name: "deedNo",
+        name: "location",
         col: 1,
         render: formDropdown,
       },
@@ -690,7 +694,7 @@ const fieldTemplate = [
     label: "ชื่อเสียงโครงการ (ผู้ประกอบการ)",
     child: [
       {
-        name: "deedNo",
+        name: "projReputation",
         col: 1,
         render: formDropdown,
       },
@@ -702,61 +706,61 @@ const fieldTemplate = [
     child: [
       {
         label: "ที่ดินรกร้าง ว่างเปล่า ห่างไกลชุมชน",
-        name: "far",
+        name: "cbEnvironment05",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านเกษตรกรรม",
-        name: "farm",
+        name: "cbEnvironment08",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านที่อยู่อาศัยประปราย ชนบท",
-        name: "hometown",
+        name: "cbEnvironment04",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านที่อยู่อาศัยสลับพานิชยกรรม",
-        name: "far",
+        name: "cbEnvironment10",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านที่อยู่อาศัยหนาแน่นน้อย",
-        name: "far",
+        name: "cbEnvironment03",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านที่อยู่อาศัยหนาแน่นปานกลาง",
-        name: "far",
+        name: "cbEnvironment02",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านที่อยู่อาศัยหนาแน่นมาก",
-        name: "far",
+        name: "cbEnvironment01",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านธุรกิจการค้าใจกลางเมือง",
-        name: "far",
+        name: "cbEnvironment09",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านพานิชยกรรม",
-        name: "far",
+        name: "cbEnvironment06",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ย่านอุตสาหกรรม",
-        name: "far",
+        name: "cbEnvironment07",
         col: 2,
         render: formCheckbox,
       },
@@ -768,49 +772,49 @@ const fieldTemplate = [
     child: [
       {
         label: "โรงฆ่าสัตว์",
-        name: "far",
+        name: "cbPollution06",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "โรงงาน",
-        name: "farm",
+        name: "cbPollution07",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ไฟฟ้าแรงสูง",
-        name: "hometown",
+        name: "cbPollution02",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "ที่ทิ้งของเสีย",
-        name: "far",
+        name: "cbPollution05",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "บ่อขยะ",
-        name: "far",
+        name: "cbPollution03",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "บ่อน้ำ",
-        name: "far",
+        name: "cbPollution01",
         col: 2,
         render: formCheckbox,
       },
       {
         label: "บ่อบำบัด",
-        name: "far",
+        name: "cbPollution04",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "อื่นๆ",
-        name: "far",
+        name: "cbPollution08",
         col: 4,
         render: formCheckboxWithDescription,
       },
@@ -822,31 +826,31 @@ const fieldTemplate = [
     child: [
       {
         label: "ไม่มีการซื้อขายเปลี่ยนมือ",
-        name: "far",
+        name: "cbLiquidity04",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "ไม่ระบุ",
-        name: "far",
+        name: "cbLiquidity05",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "มีการซื้อขายเปลี่ยนมือปริมาณน้อย",
-        name: "far",
+        name: "cbLiquidity03",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "มีการซื้อขายเปลี่ยนมือปริมาณปานกลาง",
-        name: "far",
+        name: "cbLiquidity02",
         col: 4,
         render: formCheckbox,
       },
       {
         label: "มีการซื้อขายเปลี่ยนมือปริมาณมาก",
-        name: "far",
+        name: "cbLiquidity01",
         col: 4,
         render: formCheckbox,
       },
@@ -856,7 +860,7 @@ const fieldTemplate = [
     label: "ทิศที่ตั้งหลักประกัน",
     child: [
       {
-        name: "direction",
+        name: "collatFaceDirection",
         col: 2,
         render: formDropdown,
       },
