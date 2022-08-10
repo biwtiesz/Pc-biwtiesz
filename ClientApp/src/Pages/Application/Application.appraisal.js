@@ -188,6 +188,7 @@ const fieldTemplate = [
         label: "Other",
         name: "dictrictOther",
         col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -206,6 +207,7 @@ const fieldTemplate = [
         label: "Other",
         name: "subDistrictOther",
         col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -216,16 +218,7 @@ const fieldTemplate = [
       {
         name: "documentNo",
         col: 2,
-        render: formInput,
-      },
-    ],
-  },
-  {
-    label: "เลขที่ดิน",
-    child: [
-      {
-        name: "landNo",
-        col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -327,6 +320,7 @@ const fieldTemplate = [
       {
         name: "landSizeSqM",
         col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -412,6 +406,7 @@ const fieldTemplate = [
       {
         name: "positionLatitude",
         col: 2,
+        required: true,
         render: formInput,
       },
     ],
@@ -422,29 +417,32 @@ const fieldTemplate = [
       {
         name: "positionLongtitude",
         col: 2,
+        required: true,
         render: formInput,
       },
     ],
   },
   {
     label: "สิ่งปลูกสร้าง",
-    child: [
-      {
-        name: "withBuilding",
-        col: 2,
-        render: formInput,
-      },
+    name: "withBuilding",
+    col: 2,
+    items: [
+      { value: null },
+      { text: "ไม่มีสิ่งปลูกสร้าง", value: "02" },
+      { text: "มีสิ่งปลูกสร้าง", value: "01" },
     ],
+      render: formDropdownLabel,
   },
   {
     label: "กู้ประเภทอื่นๆ",
-    child: [
-      {
-        name: "otherLoan",
-        col: 2,
-        render: formInput,
-      },
+    name: "otherLoan",
+    col: 2,
+    items: [
+      { value: null },
+      { text: "ใช่", value: "Y" },
+      { text: "ไม่ใช่", value: "N" },
     ],
+      render: formDropdownLabel,
   },
   {
     label: "เนื้อที่บ่อน้ำ(ตารางวา)",
@@ -474,13 +472,25 @@ const fieldTemplate = [
         label: "ถนนผ่านหน้าที่ดิน",
         name: "roadToLand",
         col: 2,
+        items: [
+          { value: null },
+          { text: "ทางเดินเท้า", value: "02" },
+          { text: "ทางรถยนต์", value: "01" }
+        ],
         render: formDropdownLabel,
       },
       {
-        label: "ผิวจราจร(เมตร)",
+        label: "ลักษณะผิวจราจร",
         name: "roadSurface",
         col: 2,
-        render: formInputLabel,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "ลูกรัง/หินคลุก", value: "02" },
+          { text: "ดิน", value: "03" },
+          { text: "ลาดยาง", value: "04" },
+        ],
+        render: formDropdownLabel,
       },
       {
         label: "ผิวจราจรกว้าง(เมตร)",
@@ -498,13 +508,23 @@ const fieldTemplate = [
         label: "รถยนต์เข้า-ออก",
         name: "carAccess",
         col: 2,
+        items: [
+          { value: null },
+          { text: "ได้", value: "01" },
+          { text: "ไม่ได้", value: "02" },
+        ],
         render: formDropdownLabel,
       },
       {
         label: "ทางเข้า-ออก",
         name: "entranceExit",
         col: 2,
-        render: formInputLabel,
+        items: [
+          { value: null },
+          { text: "ไม่มีปัญหา", value: "01" },
+          { text: "มีปัญหา", value: "02" },
+        ],
+        render: formDropdownLabel,
       },
       {
         label: "ต้องมีการปรับปรุงสภาพทาง",
@@ -520,7 +540,12 @@ const fieldTemplate = [
       {
         name: "appraised",
         col: 2,
-        render: formInput,
+        items: [
+          { value: null },
+          { text: "ประเมินราคา", value: "01" },
+          { text: "ไม่ประเมินราคา", value: "02" },
+        ],
+        render: formDropdownLabel,
       },
     ],
   },
@@ -530,7 +555,13 @@ const fieldTemplate = [
       {
         name: "allocation",
         col: 2,
-        render: formInput,
+        items: [
+          { value: null },
+          { text: "จัดสรรโครงการใหม่", value: "01" },
+          { text: "จัดสรรโครงการเก่า", value: "02" },
+          { text: "ไม่จัดสรร", value: "03" },
+        ],
+        render: formDropdownLabel,
       },
     ],
   },
@@ -545,7 +576,7 @@ const fieldTemplate = [
     ],
   },
   {
-    label: "เนื้อที่ถูกลุกล้ำ/ใช้เพื่อบุคคลอื่น(ตารางวา)",
+    label: "เนื้อที่ถูกลุกล้ำ\/ใช้เพื่อบุคคลอื่น(ตารางวา)",
     child: [
       {
         name: "spaceEncroached",
@@ -671,7 +702,7 @@ const fieldTemplate = [
     ],
   },
   {
-    label: "ลักษณะทางกายภาพ/รูปแปลง",
+    label: "ลักษณะทางกายภาพ\/รูปแปลง",
     child: [
       {
         name: "physicalReputation",
@@ -877,6 +908,464 @@ const fieldTemplate = [
     ],
   },
 ];
+// อาคาร
+const fieldTemplate2 = [
+  {
+    label: "บ้านเลขที่",
+    child: [
+      {
+        name: "houseNo",
+        col: 2,
+        required: true,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "ก่อสร้างบนโฉนดเลขที่",
+    child: [
+      {
+        name: "constDeedNo",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "ตำแหน่งก่อสร้าง",
+    name: "constSite",
+    col: 2,
+    items: [
+      { value: null },
+      { text: "ไม่รุกล้ำ", value: "01" },
+      { text: "รุกล้ำ", value: "02" },
+    ],
+      render: formDropdownLabel,
+  },
+  {
+    label: "ส่วน/ขนาดที่รุกล้ำ(ตารางเมตร)",
+    child: [
+      {
+        name: "sectionScaleEncr",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "สภาพการก่อสร้าง",
+    child: [
+      {
+        label: "ก่อสร้างแล้วเสร็จ(อาคารเดิม)",
+        name: "constProgOriBuilding",
+        col: 1,
+        items: [{ value: null }],
+        render: formInput,
+      },
+      {
+        label: "ก่อสร้างแล้วเสร็จ(ปลูกสร้าง/ต่อเติม)",
+        name: "constProgExpand",
+        col: 1,
+        items: [{ value: null }],
+        render: formInput,
+      },
+    ]
+  },
+  {
+    label: "อายุอาคาร(ปี)",
+    child: [
+      {
+        name: "buildingYr",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "วันที่ใบอนุญาตก่อสร้างหมดอายุ",
+    child: [
+      {
+        name: "constPermitDate",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "ประเภทอาคาร",
+    child: [
+      {
+        name: "buildingType",
+        col: 2,
+        required: true,
+        items: [
+          { value: null },
+          { text: "ตึก", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "ตึกครึ่งไม้", value: "03" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "ลักษณะอาคาร",
+    child: [
+      {
+        name: "buildingModel",
+        col: 2,
+        required: true,
+        items: [
+          { value: null },
+          { text: "บ้านเดี่ยว", value: "01" },
+          { text: "บ้านแฝด", value: "02" },
+          { text: "ทาวน์เฮ้าส์", value: "03" },
+          { text: "อาคารพาณิชย์", value: "04" },
+          { text: "แฟลต", value: "05" },
+          { text: "ห้องชุด", value: "06" },
+          { text: "อาคารชุด", value: "07" },
+          { text: "บ้านทรงไทย", value: "08" },
+          { text: "อื่นๆ", value: "99" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "รูปแบบอาคาร",
+    child: [
+      {
+        name: "buildingCond",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ธรรมดา", value: "01" },
+          { text: "ดี", value: "02" },
+          { text: "ดีมาก", value: "03" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "จำนวนชั้น",
+    child: [
+      {
+        name: "NoOfFloor",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "การใช้อยู่อาศัย",
+    child: [
+      {
+        name: "isResidential",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ได้", value: "Y" },
+          { text: "ไม่ได้", value: "N" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "โครงหลังคา",
+    child: [
+      {
+        name: "roofFrame",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "เหล็ก", value: "03" },
+          { text: "อื่นๆ", value: "04" },
+          { text: "ตรวจสอบไม่ได้", value: "05" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "หลังคา",
+    child: [
+      {
+        name: "roof",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "กระเบื้อง", value: "02" },
+          { text: "กระเบื้องลอน", value: "03" },
+          { text: "เมทัลชีท", value: "04" },
+          { text: "ไวนิล", value: "05" },
+          { text: "กระเบื้องดินเผา", value: "06" },
+          { text: "สังกะสี", value: "07" },
+          { text: "ตรวจสอบไม่ได้", value: "08" },
+          { text: "อื่นๆ", value: "09" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "ผนัง",
+    child: [
+      {
+        name: "wall",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ก่ออิฐ", value: "01" },
+          { text: "กระเบื้องแผ่นเรียบ", value: "02" },
+          { text: "ไม้", value: "03" },
+          { text: "ผนังสำเร็จรูป", value: "04" },
+          { text: "อื่น ๆ", value: "05" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "การทาสี",
+    child: [
+      {
+        name: "painting",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ทาสี", value: "01" },
+          { text: "ไม่ทาสี", value: "02" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "พื้นชั้น 1",
+    child: [
+      {
+        name: "floor1",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "สมาร์ทบอร์ด", value: "03" },
+          { text: "อื่นๆ", value: "04" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "ผิวพื้นชั้น1",
+    child: [
+      {
+        name: "floor1Surface",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "กระเบื้อง", value: "01" },
+          { text: "กระเบื้องเซรามิค(เคลือบ)", value: "02" },
+          { text: "กระเบื้องดินเผา", value: "03" },
+          { text: "แกรนิตโต้", value: "04" },
+          { text: "กระเบื้องยาง", value: "05" },
+          { text: "ไม้ / ปาร์เก้", value: "06" },
+          { text: "หินอ่อน", value: "07" },
+          { text: "หินขัด", value: "08" },
+          { text: "พื้นปูนขัดมัน", value: "09" },
+          { text: "ลามิเนต", value: "10" },
+          { text: "อื่น ๆ", value: "11" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },{
+    label: "พื้นชั้น 2",
+    child: [
+      {
+        name: "floor2",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "สมาร์ทบอร์ด", value: "03" },
+          { text: "อื่นๆ", value: "04" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "ผิวพื้นชั้น2",
+    child: [
+      {
+        name: "floor2Surface",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "กระเบื้อง", value: "01" },
+          { text: "กระเบื้องเซรามิค(เคลือบ)", value: "02" },
+          { text: "กระเบื้องดินเผา", value: "03" },
+          { text: "แกรนิตโต้", value: "04" },
+          { text: "กระเบื้องยาง", value: "05" },
+          { text: "ไม้ / ปาร์เก้", value: "06" },
+          { text: "หินอ่อน", value: "07" },
+          { text: "หินขัด", value: "08" },
+          { text: "พื้นปูนขัดมัน", value: "09" },
+          { text: "ลามิเนต", value: "10" },
+          { text: "อื่น ๆ", value: "11" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "หมายเหตุพื้นชั้นอื่นๆ",
+    child: [
+      {
+        name: "othFloor",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "คอนกรีตเสริมเหล็ก", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "สมาร์ทบอร์ด", value: "03" },
+          { text: "อื่นๆ", value: "04" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "หมายเหตุผิวพื้นชั้นอื่นๆ",
+    child: [
+      {
+        name: "othFloorSurface",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "กระเบื้อง", value: "01" },
+          { text: "กระเบื้องเซรามิค(เคลือบ)", value: "02" },
+          { text: "กระเบื้องดินเผา", value: "03" },
+          { text: "แกรนิตโต้", value: "04" },
+          { text: "กระเบื้องยาง", value: "05" },
+          { text: "ไม้ / ปาร์เก้", value: "06" },
+          { text: "หินอ่อน", value: "07" },
+          { text: "หินขัด", value: "08" },
+          { text: "พื้นปูนขัดมัน", value: "09" },
+          { text: "ลามิเนต", value: "10" },
+          { text: "อื่น ๆ", value: "11" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "รั้ว",
+    child: [
+      {
+        name: "fence",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ซีเมนต์บล็อค", value: "01" },
+          { text: "ไม้", value: "02" },
+          { text: "เหล็ก", value: "03" },
+          { text: "อิฐ", value: "04" },
+          { text: "สแตนเลส", value: "05" },
+          { text: "ไม่มีรั้ว", value: "06" },
+          { text: "ลวดตาข่าย", value: "07" },
+          { text: "ลวดหนาม", value: "08" },
+          { text: "อื่นๆ", value: "09" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "ประเภทการก่อสร้าง",
+    child: [
+      {
+        name: "constType",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ปลูกสร้างเอง", value: "01" },
+          { text: "บ้านจัดสรร", value: "02" },
+          { text: "อื่น ๆ", value: "03" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "หมู่บ้าน",
+    child: [
+      {
+        name: "village",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "การใช้ประโยชน์ของอาคาร",
+    child: [
+      {
+        name: "utilOfBuilding",
+        col: 2,
+        items: [
+          { value: null },
+          { text: "ใช้เพื่ออยู่อาศัย", value: "01" },
+          { text: "พักอาศัยไม่น้อยกว่า 30%", value: "02" },
+          { text: "พักอาศัยน้อยกว่า 30%", value: "03" },
+          { text: "ใช้เพื่อการแบ่งเช่า", value: "04" },
+          { text: "ใช้เพื่อการอื่นๆ", value: "05" },
+        ],
+          render: formDropdownLabel,
+      },
+    ],
+  },
+  {
+    label: "เนื้อที่อาคาร(ตารางเมตร)",
+    child: [
+      {
+        name: "buildingArea",
+        col: 2,
+        required: true,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "เนื้อที่ประกันอัคคีภัย(ตารางเมตร)",
+    child: [
+      {
+        name: "fireInsSpace",
+        col: 2,
+        required: true,
+        render: formInput,
+      },
+    ],
+  },
+  {
+    label: "รายละเอียดอื่น ๆ",
+    child: [
+      {
+        name: "remark",
+        col: 2,
+        render: formInput,
+      },
+    ],
+  },
+]
 
 var RequiredSchema = Yup.object().shape(
   fieldTemplate.reduce((current, f) => {
