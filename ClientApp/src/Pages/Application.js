@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Link } from "react-router-dom";
 import ApplicationInfo from "./Application.info";
 // import ApplicationAppraisal from "./Application.appraisal";
-import ApplicationAppraisal from "./Application/Application.appraisal";
+import ApplicationAppraisal from "./Application/Application.appraisal.land";
 
 import {
   CheckIcon,
