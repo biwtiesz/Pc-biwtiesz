@@ -1,5 +1,6 @@
 using System.Text;
 using DigitalAppraisal.Data;
+using DigitalAppraisal.Data.Interfaces;
 using DigitalAppraisal.Entities;
 using DigitalAppraisal.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAuthentication(options =>
 {

@@ -12,6 +12,8 @@ namespace DigitalAppraisal.Data
 
         }
 
+        public DbSet<Parameter> Parameter { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
