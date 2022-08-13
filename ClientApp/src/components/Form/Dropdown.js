@@ -22,7 +22,7 @@ const Dropdown = ({label, name, value, error, items = [], showRemarkIf}) => {
           }
         >
           {items.map(i =>
-            i.value ? (
+            i.value != null ? (
               <option value={i.value}>{i.text}</option>
             ) : (
               <option>Please select</option>

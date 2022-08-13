@@ -20,6 +20,11 @@ namespace DigitalAppraisal.Data.Repository
             return dbSet.ToList();
         }
 
+        public IEnumerable<T> FindAll(Expression<Func<T, bool>> condition)
+        {
+            return dbSet.Where(condition).ToList();
+        }
+
         public T Find(Expression<Func<T, bool>> condition)
         {
             return dbSet.Where(condition).FirstOrDefault();
