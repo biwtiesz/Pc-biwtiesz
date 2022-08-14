@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useNavigate, Outlet} from 'react-router-dom'
 import axios from 'axios'
 
 function classNames(...classes) {
@@ -8,7 +8,7 @@ function classNames(...classes) {
 
 const Parameter = () => {
   const [parameters, setParameters] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
   useEffect(() => {
     axios
       .get('/api/parameter')
@@ -18,9 +18,9 @@ const Parameter = () => {
 
   const handleOnDelete = id => {
     axios.delete(`api/parameter/${id}`).then(resp => {
-      history.replace('/')
+      navigate('/')
       setTimeout(() => {
-        history.replace('/Parameter')
+        navigate('/Parameter')
       }, 1)
     })
   }

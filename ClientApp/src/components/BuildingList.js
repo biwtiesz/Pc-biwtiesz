@@ -5,7 +5,6 @@ const BuildingList = ({buildings, onAdd}) => {
     <>
       <div className="flex flex-col space-y-2 items-center md:flex-row md:space-x-2 md:space-y-0">
         <div
-          key={''}
           className="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 hover:ring-2  hover:ring-indigo-500"
           onClick={onAdd}
         >
@@ -23,7 +22,6 @@ const BuildingList = ({buildings, onAdd}) => {
           </div>
         </div>
         <div
-          key={''}
           className="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 hover:ring-2  hover:ring-indigo-500"
           onClick={onAdd}
         >

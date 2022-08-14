@@ -1,53 +1,38 @@
 import React from 'react'
-import {Route, Switch} from 'react-router'
+import {Routes, Route, Outlet} from 'react-router-dom'
 import {AuthProvider} from './contexts/AuthContext'
-import AuthenticatedRoute from './components/AuthenticatedRoute'
+import RequireAuth from './components/RequireAuth'
 import Layout from './components/Layout'
-import Dashboard from './Pages/Dashboard'
-import Workspace from './Pages/Workspace'
-import Application from './Pages/Application'
-import Login from './Pages/Login'
-import Parameter from './Pages/Parameter/Parameter'
-import ParameterDetail from './Pages/Parameter/Detail'
+import Dashboard from './pages/Dashboard'
+import Workspace from './pages/Workspace'
+import Application from './pages/Application'
+import Login from './pages/Login'
+import Parameter from './pages/Parameter/Parameter'
+import ParameterDetail from './pages/Parameter/Detail'
 
 const App = () => {
   return (
     <AuthProvider>
-      <Route exact path="/Login" component={Login} />
-      <Route
-        exact
-        path={[
-          '/',
-          '/Workspace',
-          '/Application/:id',
-          '/Parameter',
-          '/Parameter/:id',
-          '/Parameter/Create',
-        ]}
-      >
-        <Layout>
-          <AuthenticatedRoute exact path="/" component={Dashboard} />
-          <AuthenticatedRoute exact path="/Workspace" component={Workspace} />
-          <AuthenticatedRoute
-            exact
-            path="/Application/:id"
-            component={Application}
-          />
-          <Switch>
-            <AuthenticatedRoute exact path="/Parameter" component={Parameter} />
-            <AuthenticatedRoute
-              exact
-              path="/Parameter/Create"
-              component={ParameterDetail}
-            />
-            <AuthenticatedRoute
-              exact
-              path="/Parameter/:id"
-              component={ParameterDetail}
-            />
-          </Switch>
-        </Layout>
-      </Route>
+      <Routes>
+        <Route path="/Login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Layout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="Workspace" element={<Workspace />} />
+          <Route path="Application/:id" element={<Application />} />
+          <Route path="Parameter" element={<Outlet />}>
+            <Route index element={<Parameter />} />
+            <Route path=":id" element={<ParameterDetail />} />
+            <Route path="Create" element={<ParameterDetail />} />
+          </Route>
+        </Route>
+      </Routes>
     </AuthProvider>
   )
 }

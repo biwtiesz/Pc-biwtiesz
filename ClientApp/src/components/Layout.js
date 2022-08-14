@@ -1,8 +1,9 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Sidebar from "../components/Sidebar";
+import React from 'react'
+import {Outlet} from 'react-router-dom'
+import Navbar from './Navbar'
+import Sidebar from '../components/Sidebar'
 
-const Layout = ({ children }) => {
+const Layout = ({children}) => {
   return (
     <div className="flex">
       {/* Sidebar */}
@@ -13,10 +14,12 @@ const Layout = ({ children }) => {
         {/* <div className="relative z-50 h-16 bg-white  shadow-sm">Navbar</div> */}
         <Navbar />
         {/* Body */}
-        <div className="flex-1 bg-slate-100 p-10">{children}</div>
+        <div className="flex-1 bg-slate-100 p-10">
+          <Outlet />
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

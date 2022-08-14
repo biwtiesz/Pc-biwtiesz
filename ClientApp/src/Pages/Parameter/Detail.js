@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react'
-import {useParams, Link, useHistory} from 'react-router-dom'
+import {useParams, Link, useNavigate} from 'react-router-dom'
 import {Formik, Form, Field} from 'formik'
 import {Input, Remark, Dropdown} from '../../components/Form'
 import axios from 'axios'
 
 const Detail = () => {
   const {id} = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [parameter, setParameter] = useState(id ? null : {})
   const [group, setGroup] = useState('')
   const [code, setCode] = useState('')
@@ -28,7 +28,7 @@ const Detail = () => {
         const request = id
           ? axios.patch(`api/parameter/${id}`, {...values})
           : axios.post('api/parameter/create', {...values})
-        request.then(resp => history.push('/Parameter')).catch()
+        request.then(resp => navigate('/Parameter')).catch()
       }}
       validateOnBlur={false}
       validateOnChange={false}

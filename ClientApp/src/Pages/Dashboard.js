@@ -1,6 +1,5 @@
-import React from "react";
-import Table from "../components/Table";
-import Layout from "../components/Layout";
+import React from 'react'
+import Table from '../components/Table'
 
 const Dashboard = () => {
   return (
@@ -65,7 +64,7 @@ const Dashboard = () => {
         <Table />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

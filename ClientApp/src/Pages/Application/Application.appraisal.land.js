@@ -1084,7 +1084,10 @@ const ApplicationAppraisal = () => {
               </div>
               {landAppraisalTemplate.map((f, i) => {
                 return (
-                  <div className="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+                  <div
+                    key={`${f.label}_${i}`}
+                    className="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5"
+                  >
                     <label
                       style={
                         f.row && {
@@ -1097,9 +1100,10 @@ const ApplicationAppraisal = () => {
                     >
                       {f.label}
                     </label>
-                    {f.child.map(c => {
+                    {f.child.map((c, i) => {
                       return (
                         <div
+                          key={`${c.name}_${i}`}
                           className="mt-2"
                           style={{gridColumn: `span ${c.col} / span ${c.col}`}}
                         >
@@ -1152,8 +1156,6 @@ const ApplicationAppraisal = () => {
             <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          {/* <div className="fixed inset-0" /> */}
-
           <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
               <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -1202,7 +1204,10 @@ const ApplicationAppraisal = () => {
                           </div>
                           {buildingAppraisalTemplate.map((f, i) => {
                             return (
-                              <div className="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+                              <div
+                                // key={`template_${i}`}
+                                className="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5"
+                              >
                                 <label
                                   style={
                                     f.row && {
@@ -1215,9 +1220,10 @@ const ApplicationAppraisal = () => {
                                 >
                                   {f.label}
                                 </label>
-                                {f.child.map(c => {
+                                {f.child.map((c, i) => {
                                   return (
                                     <div
+                                      // key={`${c.name}_${i}`}
                                       className="mt-2"
                                       style={{
                                         gridColumn: `span ${c.col} / span ${c.col}`,
@@ -1226,6 +1232,7 @@ const ApplicationAppraisal = () => {
                                       {c.render
                                         ? c.render({
                                             ...c,
+                                            key: i,
                                             value: values[c.name],
                                             error: errors[c.name],
                                             touched: touched[c.name],
@@ -1257,26 +1264,6 @@ const ApplicationAppraisal = () => {
                         </Form>
                       )}
                     </Formik>
-                    {/* <form className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-
-                      <div className="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
-                        <div className="flex justify-end space-x-3">
-                          <button
-                            type="button"
-                            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => setOpen(false)}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            type="submit"
-                            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          >
-                            Create
-                          </button>
-                        </div>
-                      </div>
-                    </form> */}
                   </div>
                 </Transition.Child>
               </div>

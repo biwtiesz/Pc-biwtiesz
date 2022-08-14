@@ -4,7 +4,6 @@ const Dropdown = ({label, name, value, error, items = [], showRemarkIf}) => {
   return (
     <>
       <div className="mt-1 relative">
-        {/* <label htmlFor={name} className="block text-sm font-medium text-gray-700"> */}
         <label
           htmlFor={name}
           className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
@@ -23,9 +22,11 @@ const Dropdown = ({label, name, value, error, items = [], showRemarkIf}) => {
         >
           {items.map(i =>
             i.value != null ? (
-              <option value={i.value}>{i.text}</option>
+              <option key={i.value} value={i.value}>
+                {i.text}
+              </option>
             ) : (
-              <option>Please select</option>
+              <option key={i.value}>Please select</option>
             ),
           )}
         </Field>

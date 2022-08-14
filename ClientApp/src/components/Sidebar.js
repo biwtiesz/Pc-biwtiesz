@@ -25,7 +25,7 @@ function classNames(...classes) {
 
 const Sidebar = () => {
   const location = useLocation()
-  console.log(location)
+
   return (
     <div className="flex flex-col flex-grow  pt-5 pb-4 overflow-y-auto">
       <div className="h-36 self-center">

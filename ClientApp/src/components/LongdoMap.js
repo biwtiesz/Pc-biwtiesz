@@ -13,12 +13,11 @@ export class LongdoMap extends Component {
     longdo = window.longdo
     map = new window.longdo.Map({
       placeholder: document.getElementById(this.props.id),
-      language: 'en',
+      language: 'th',
     })
   }
 
   componentDidMount() {
-    console.log('mapmount')
     const existingScript = document.getElementById('longdoMapScript')
     const callback = this.props.callback
 
