@@ -63,7 +63,6 @@ namespace DigitalAppraisal.Controllers
                 dbParameter.Description = parameter.Description;
                 dbParameter.Order = parameter.Order;
                 dbParameter.Language = parameter.Language;
-                dbParameter.Active = parameter.Active;
 
                 _unitOfWork.Parameter.Edit(dbParameter);
                 _unitOfWork.Save();

@@ -1,7 +1,7 @@
 import {Field} from 'formik'
 import {ExclamationCircleIcon} from '@heroicons/react/solid'
 
-const Input = ({label, name, type = 'text', error, touched}) => {
+const Input = ({label, name, className, type = 'text', error, touched}) => {
   return (
     <>
       <div className="mt-1 relative">

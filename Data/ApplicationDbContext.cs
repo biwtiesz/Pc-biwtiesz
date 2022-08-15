@@ -13,6 +13,8 @@ namespace DigitalAppraisal.Data
         }
 
         public DbSet<Parameter> Parameter { get; set; }
+        public DbSet<GeneralCode> GeneralCode { get; set; }
+        public DbSet<GeneralCodeDetail> GeneralCodeDetail { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

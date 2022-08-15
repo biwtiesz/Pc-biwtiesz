@@ -1,6 +1,6 @@
 namespace DigitalAppraisal.Entities
 {
-    public class Parameter
+    public class GeneralCodeDetail
     {
         public long Id { get; set; }
         public string Group { get; set; }

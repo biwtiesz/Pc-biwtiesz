@@ -8,12 +8,15 @@ namespace DigitalAppraisal.Data
         private readonly ApplicationDbContext _context;
 
         public IParameterRepository Parameter { get; private set; }
-
+        public IGeneralCodeRepository GeneralCode { get; private set; }
+        public IGeneralCodeDetailRepository GeneralCodeDetail { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
 
             Parameter = new ParameterRepository(context);
+            GeneralCode = new GeneralCodeRepository(context);
+            GeneralCodeDetail = new GeneralCodeDetailRepository(context);
         }
 
         public void Save()
