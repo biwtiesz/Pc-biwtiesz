@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, Fragment} from 'react'
 import {Link, useNavigate, useParams} from 'react-router-dom'
 import Login from '../Login'
 import {Formik, Form, Field} from 'formik'
 import {Input, Remark, Dropdown} from '../../components/Form'
 import axios from 'axios'
-import {Switch} from '@headlessui/react'
+import {PaperClipIcon} from '@heroicons/react/solid'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -12,14 +12,15 @@ function classNames(...classes) {
 
 const Detail = () => {
   const {id} = useParams()
+  const navigate = useNavigate()
   const [detail, setDetail] = useState([id ? null : {}])
   const [language, setLanguage] = useState('th')
   const [group, setGroup] = useState('')
   const [description, setDescription] = useState('')
   const [localDescription, setlocalDescription] = useState('')
   const [isDisabled, setIsDisabled] = useState(false)
-  const [enabled, setEnabled] = useState(false)
-  const navigate = useNavigate()
+  const [enabled, setEnabled] = useState(true)
+  const [edit, setEdit] = useState('')
 
   useEffect(() => {
     axios
@@ -27,11 +28,11 @@ const Detail = () => {
       .then(resp => setDetail(resp.data))
       .catch()
   }, [id])
-
-  console.log(detail)
-
   const handleLanguageOnChange = event => {
     setLanguage(event.currentTarget.value)
+  }
+  const setEdits = event => {
+    setEdit('edit')
   }
 
   if (!detail.generalCodeDetail) return <div>Loading...</div>
@@ -46,80 +47,45 @@ const Detail = () => {
             </h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">General Code</p>
           </div>
-          <div className="px-4 py-5 sm:px-6">
-            {/* <select
-              id="language"
-              name="language"
-              autoComplete="language"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md w-[85px]"
-              onChange={handleLanguageOnChange}
-            >
-              <option value="th">TH</option>
-              <option value="en">EN</option>
-            </select> */}
-            <Switch
-              checked={enabled}
-              onChange={setEnabled}
-              className={classNames(
-                enabled ? 'bg-indigo-600' : 'bg-gray-200',
-                'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
-              )}
-            >
-              <span className="sr-only">Use setting</span>
-              <span
-                className={classNames(
-                  enabled ? 'translate-x-5' : 'translate-x-0',
-                  'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+          <div className="flex justify-center items-center">
+            <div className="flex-shrink-0 px-4 py-5 sm:px-6">
+              <div className="flex justify-end space-x-3">
+                {edit == 'edit' ? (
+                  <button
+                    onClick={setEdits}
+                    className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Cancel
+                  </button>
+                ) : (
+                  ''
                 )}
+                <button
+                  type="submit"
+                  onClick={setEdits}
+                  className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  {edit == 'edit' ? 'Save' : 'Edit'}
+                </button>
+              </div>
+            </div>
+            <div className="px-4 py-5 sm:px-6">
+              <select
+                id="language"
+                name="language"
+                autoComplete="language"
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md w-full"
+                onChange={handleLanguageOnChange}
               >
-                <span
-                  className={classNames(
-                    enabled
-                      ? 'opacity-0 ease-out duration-100'
-                      : 'opacity-100 ease-in duration-200',
-                    'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
-                  )}
-                  aria-hidden="true"
-                >
-                  <svg
-                    className="h-3 w-3 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 12 12"
-                  >
-                    <path
-                      d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span
-                  className={classNames(
-                    enabled
-                      ? 'opacity-100 ease-in duration-200'
-                      : 'opacity-0 ease-out duration-100',
-                    'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
-                  )}
-                  aria-hidden="true"
-                >
-                  <svg
-                    className="h-3 w-3 text-indigo-600"
-                    fill="currentColor"
-                    viewBox="0 0 12 12"
-                  >
-                    <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                  </svg>
-                </span>
-              </span>
-            </Switch>
+                <option value="th">TH</option>
+                <option value="en">EN</option>
+              </select>
+            </div>
           </div>
         </div>
         <Formik
           initialValues={{...detail}}
           onSubmit={values => {
-            console.log(values)
             const request = id
               ? axios.patch(`api/generalcode/${id}`, {...values})
               : axios.post('api/generalcode/create', {...values})
@@ -129,7 +95,7 @@ const Detail = () => {
           validateOnChange={false}
         >
           <Form>
-            <div className="bg-red-300 shadow overflow-hidden sm:rounded-lg">
+            {edit == 'edit' ? (
               <div className="border-t border-gray-200">
                 <dl>
                   <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
@@ -142,7 +108,7 @@ const Detail = () => {
                       disabled={isDisabled}
                     />
                   </div>
-                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Description
                     </dt>
@@ -156,7 +122,7 @@ const Detail = () => {
                       />
                     </div>
                   </div>
-                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Local Description
                     </dt>
@@ -172,23 +138,38 @@ const Detail = () => {
                   </div>
                 </dl>
               </div>
-            </div>
-            {/* <div className="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
-              <div className="flex justify-end space-x-3">
-                <Link
-                  to="/GeneralCode"
-                  className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Cancel
-                </Link>
-                <button
-                  type="submit"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  {id ? 'Save' : 'Create'}
-                </button>
+            ) : (
+              <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div className="border-t border-gray-200">
+                  <dl>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Group
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {detail.group}
+                      </dd>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Description
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {detail.description}
+                      </dd>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Local Description
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {detail.localDescription}
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
-            </div> */}
+            )}
           </Form>
         </Formik>
 

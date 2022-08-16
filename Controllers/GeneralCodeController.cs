@@ -47,7 +47,7 @@ namespace DigitalAppraisal.Controllers
             generalCodeDTO.Id = generalCode.Id;
             generalCodeDTO.Group = generalCode.Group;
             generalCodeDTO.Description = generalCode.Description;
-            generalCodeDTO.LocalDescription = generalCode.Description;
+            generalCodeDTO.LocalDescription = generalCode.LocalDescription;
 
             generalCodeDTO.GeneralCodeDetail = generalCodeDetail;
 
