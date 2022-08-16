@@ -18,9 +18,7 @@ const Detail = () => {
   const [group, setGroup] = useState('')
   const [description, setDescription] = useState('')
   const [localDescription, setlocalDescription] = useState('')
-  const [isDisabled, setIsDisabled] = useState(false)
-  const [enabled, setEnabled] = useState(true)
-  const [edit, setEdit] = useState('')
+  const [edit, setEdit] = useState('read')
 
   useEffect(() => {
     axios
@@ -32,7 +30,12 @@ const Detail = () => {
     setLanguage(event.currentTarget.value)
   }
   const setEdits = event => {
-    setEdit('edit')
+    event.preventDefault()
+    if (edit == 'read') {
+      setEdit('edit')
+    } else {
+      setEdit('read')
+    }
   }
 
   if (!detail.generalCodeDetail) return <div>Loading...</div>
@@ -40,49 +43,6 @@ const Detail = () => {
   return (
     <div>
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div className="flex justify-between items-center">
-          <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              General Code Detail
-            </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">General Code</p>
-          </div>
-          <div className="flex justify-center items-center">
-            <div className="flex-shrink-0 px-4 py-5 sm:px-6">
-              <div className="flex justify-end space-x-3">
-                {edit == 'edit' ? (
-                  <button
-                    onClick={setEdits}
-                    className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    Cancel
-                  </button>
-                ) : (
-                  ''
-                )}
-                <button
-                  type="submit"
-                  onClick={setEdits}
-                  className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  {edit == 'edit' ? 'Save' : 'Edit'}
-                </button>
-              </div>
-            </div>
-            <div className="px-4 py-5 sm:px-6">
-              <select
-                id="language"
-                name="language"
-                autoComplete="language"
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md w-full"
-                onChange={handleLanguageOnChange}
-              >
-                <option value="th">TH</option>
-                <option value="en">EN</option>
-              </select>
-            </div>
-          </div>
-        </div>
         <Formik
           initialValues={{...detail}}
           onSubmit={values => {
@@ -95,6 +55,59 @@ const Detail = () => {
           validateOnChange={false}
         >
           <Form>
+            <div className="flex justify-between items-center">
+              <div className="px-4 py-5 sm:px-6">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  General Code Detail
+                </h3>
+                <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                  General Code
+                </p>
+              </div>
+              <div className="flex justify-center items-center">
+                <div className="flex-shrink-0 px-4 py-5 sm:px-6">
+                  <div className="flex justify-end space-x-3">
+                    {edit == 'edit' ? (
+                      <button
+                        onClick={setEdits}
+                        className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                      >
+                        Cancel
+                      </button>
+                    ) : (
+                      ''
+                    )}
+                    {edit == 'edit' ? (
+                      <button
+                        type="submit"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        onClick={setEdits}
+                        className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className="px-4 py-5 sm:px-6">
+                  <select
+                    id="language"
+                    name="language"
+                    autoComplete="language"
+                    className="shadow-sm focus:ring-orange-500 focus:border-orange-500 block sm:text-sm border-gray-300 rounded-md w-full"
+                    onChange={handleLanguageOnChange}
+                  >
+                    <option value="th">TH</option>
+                    <option value="en">EN</option>
+                  </select>
+                </div>
+              </div>
+            </div>
             {edit == 'edit' ? (
               <div className="border-t border-gray-200">
                 <dl>
@@ -105,7 +118,6 @@ const Detail = () => {
                       name="group"
                       type="text"
                       className="bg-gray-900"
-                      disabled={isDisabled}
                     />
                   </div>
                   <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
@@ -118,7 +130,6 @@ const Detail = () => {
                         name="description"
                         as="textarea"
                         className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                        disabled={isDisabled}
                       />
                     </div>
                   </div>
@@ -132,42 +143,37 @@ const Detail = () => {
                         name="localDescription"
                         as="textarea"
                         className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                        disabled={isDisabled}
                       />
                     </div>
                   </div>
                 </dl>
               </div>
             ) : (
-              <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div className="border-t border-gray-200">
-                  <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Group
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {detail.group}
-                      </dd>
+              <div className="border-t border-gray-200">
+                <dl>
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">Group</dt>
+                    <div className="text-sm text-gray-900 col-span-2 mb-8">
+                      {detail.description}
                     </div>
-                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Description
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {detail.description}
-                      </dd>
+                  </div>
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Description
+                    </dt>
+                    <div className="text-sm text-gray-900 col-span-2 mb-[115px]">
+                      {detail.description}
                     </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Local Description
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {detail.localDescription}
-                      </dd>
+                  </div>
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Local Description
+                    </dt>
+                    <div className="text-sm text-gray-900 col-span-2 mb-[115px]">
+                      {detail.localDescription}
                     </div>
-                  </dl>
-                </div>
+                  </div>
+                </dl>
               </div>
             )}
           </Form>
@@ -260,7 +266,7 @@ const Detail = () => {
                               >
                                 <Link
                                   to={`/GeneralCode/${details.group}/`}
-                                  className="text-indigo-600 hover:text-indigo-900"
+                                  className="text-orange-600 hover:text-orange-900"
                                 >
                                   Edit
                                   <span className="sr-only">
@@ -283,7 +289,7 @@ const Detail = () => {
         <div className="flex justify-end space-x-3">
           <Link
             to="/GeneralCode"
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             Back
           </Link>

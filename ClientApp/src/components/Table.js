@@ -1,106 +1,186 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {
+  ChevronRightIcon,
+  DotsVerticalIcon,
+  SearchIcon,
+  SelectorIcon,
+} from '@heroicons/react/solid'
 
-const people = [
+const projects = [
   {
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    department: 'Optimization',
-    email: 'lindsay.walton@example.com',
-    role: 'Member',
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    id: 1,
+    title: 'GraphQL API',
+    initials: 'GA',
+    team: 'Engineering',
+    members: [
+      {
+        name: 'Dries Vincent',
+        handle: 'driesvincent',
+        imageUrl:
+          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+      {
+        name: 'Lindsay Walton',
+        handle: 'lindsaywalton',
+        imageUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+      {
+        name: 'Courtney Henry',
+        handle: 'courtneyhenry',
+        imageUrl:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+      {
+        name: 'Tom Cook',
+        handle: 'tomcook',
+        imageUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+    ],
+    totalMembers: 12,
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
   },
-  {
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    department: 'Optimization',
-    email: 'lindsay2.walton@example.com',
-    role: 'Member',
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    department: 'Optimization',
-    email: 'lindsay3.walton@example.com',
-    role: 'Member',
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  // More people...
+  // More projects...
 ]
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const Table = () => {
   return (
-    <div className="flex flex-col">
-      <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                    Application ID
-                  </th>
-                  <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Application No
-                  </th>
-                  <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Customer Name
-                  </th>
-                  <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Date Received
-                  </th>
-                  <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Status
-                  </th>
+    <>
+      <div className="mt-10 sm:hidden">
+        <div className="px-4 sm:px-6">
+          <h2 className="text-gray-900 text-sm font-medium">Projects</h2>
+        </div>
+        <ul
+          role="list"
+          className="mt-3 border-t border-gray-200 divide-y divide-gray-100"
+        >
+          {projects.map(project => (
+            <li key={project.id}>
+              <a
+                href="#"
+                className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
+              >
+                <span className="flex items-center truncate space-x-3">
+                  <span
+                    className={classNames(
+                      project.bgColorClass,
+                      'w-2.5 h-2.5 flex-shrink-0 rounded-full',
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="font-medium truncate text-sm leading-6">
+                    {project.title}{' '}
+                    <span className="truncate font-normal text-gray-500">
+                      in {project.team}
+                    </span>
+                  </span>
+                </span>
+                <ChevronRightIcon
+                  className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-                  <th className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {people.map(person => (
-                  <tr key={person.email}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                      123
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <div className="text-gray-900 font-medium">
-                        AP65000000123
+      {/* Projects table (small breakpoint and up) */}
+      <div className="hidden mt-8 sm:block">
+        <div className="align-middle inline-block min-w-full border-b border-gray-200">
+          <table className="min-w-full">
+            <thead>
+              <tr className="border-t border-gray-200">
+                <th
+                  className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-900"
+                  scope="col"
+                >
+                  <span className="lg:pl-2">Project</span>
+                </th>
+                <th
+                  className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-900"
+                  scope="col"
+                >
+                  Members
+                </th>
+                <th
+                  className="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-sm font-semibold text-gray-900"
+                  scope="col"
+                >
+                  Last updated
+                </th>
+                <th
+                  className="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-sm font-semibold text-gray-900"
+                  scope="col"
+                />
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-100">
+              {projects.map(project => (
+                <tr key={project.id}>
+                  <td className="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900">
+                    <div className="flex items-center space-x-3 lg:pl-2">
+                      <div
+                        className={classNames(
+                          project.bgColorClass,
+                          'flex-shrink-0 w-2.5 h-2.5 rounded-full',
+                        )}
+                        aria-hidden="true"
+                      />
+                      <a href="#" className="truncate hover:text-gray-600">
+                        <span>
+                          {project.title}{' '}
+                          <span className="text-gray-500 font-normal">
+                            in {project.team}
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3 text-sm text-gray-500 font-medium">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex flex-shrink-0 -space-x-1">
+                        {project.members.map(member => (
+                          <img
+                            key={member.handle}
+                            className="max-w-none h-6 w-6 rounded-full ring-2 ring-white"
+                            src={member.imageUrl}
+                            alt={member.name}
+                          />
+                        ))}
                       </div>
-                      <div className="text-gray-500">6000123001</div>
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      ประยุทธ จันทร์โอชา
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      2022/02/22 08.30
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                        Processing
-                      </span>
-                    </td>
-                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        to="/Application/1"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit<span className="sr-only">, {person.name}</span>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      {project.totalMembers > project.members.length ? (
+                        <span className="flex-shrink-0 text-xs leading-5 font-medium">
+                          +{project.totalMembers - project.members.length}
+                        </span>
+                      ) : null}
+                    </div>
+                  </td>
+                  <td className="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right">
+                    {project.lastUpdated}
+                  </td>
+                  <td className="px-6 py-3 whitespace-nowrap text-right text-sm font-medium">
+                    <a
+                      href="#"
+                      className="text-indigo-600 hover:text-indigo-900"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

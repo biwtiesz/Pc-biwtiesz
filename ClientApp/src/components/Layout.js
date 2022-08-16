@@ -1,22 +1,29 @@
 import React from 'react'
+import {Fragment, useState} from 'react'
 import {Outlet} from 'react-router-dom'
 import Navbar from './Navbar'
 import Sidebar from '../components/Sidebar'
+import Dashboard from '../pages/Dashboard'
+import {Menu, Transition} from '@headlessui/react'
+import {
+  ClockIcon,
+  HomeIcon,
+  MenuAlt1Icon,
+  ViewListIcon,
+} from '@heroicons/react/outline'
+import {SearchIcon} from '@heroicons/react/solid'
+import Table from './Table'
 
 const Layout = ({children}) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="w-72 min-h-screen border border-gray-200 border-r ">
-        <Sidebar />
-      </div>
-      <div className="flex flex-col flex-1">
-        {/* <div className="relative z-50 h-16 bg-white  shadow-sm">Navbar</div> */}
-        <Navbar />
-        {/* Body */}
-        <div className="flex-1 bg-slate-100 p-10">
+    <div className="min-h-full">
+      <Sidebar />
+      <div className="lg:pl-64 flex flex-col">
+        <main className="flex-1">
+          <Navbar />
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   )
