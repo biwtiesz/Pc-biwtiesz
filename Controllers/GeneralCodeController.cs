@@ -25,23 +25,24 @@ namespace DigitalAppraisal.Controllers
 
             return Ok(generalCode);
         }
-        [Route("{id}")]
-        public ActionResult<GeneralCode> Get(long id)
+
+        [Route("{group}")]
+        public ActionResult<GeneralCode> Get(string group)
         {
-            var generalCode = _unitOfWork.GeneralCode.Find(p => p.Id == id);
+            var generalCode = _unitOfWork.GeneralCode.Find(p => p.Group == group);
             if (generalCode != null)
             {
                 return Ok(generalCode);
             }
             return NotFound();
         }
-        [Route("search")]
-        public ActionResult<IEnumerable<GeneralCodeDTO>> Search(long id)
+        [Route("getGeneralCode")]
+        public ActionResult<IEnumerable<GeneralCodeDTO>> getGeneralCode(string group)
         {
             GeneralCodeDTO generalCodeDTO = new();
             generalCodeDTO.GeneralCodeDetail = new List<GeneralCodeDetail>();
 
-            var generalCode = _unitOfWork.GeneralCode.Find(p => p.Id == id);
+            var generalCode = _unitOfWork.GeneralCode.Find(p => p.Group == group);
             var generalCodeDetail = _unitOfWork.GeneralCodeDetail.FindAll(p => p.Group == generalCode.Group).ToList();
 
             generalCodeDTO.Id = generalCode.Id;
@@ -52,6 +53,14 @@ namespace DigitalAppraisal.Controllers
             generalCodeDTO.GeneralCodeDetail = generalCodeDetail;
 
             return Ok(generalCodeDTO);
+        }
+
+        [Route("getGeneralCodeDetail")]
+        public ActionResult<IEnumerable<GeneralCodeDetail>> getGeneralCodeDetail(long id)
+        {
+            var generalCodeDetail = _unitOfWork.GeneralCodeDetail.Find(p => p.Id == id);
+
+            return Ok(generalCodeDetail);
         }
 
 
@@ -81,6 +90,29 @@ namespace DigitalAppraisal.Controllers
                 _unitOfWork.Save();
 
                 return Ok(dbGeneralCode);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPatch]
+        [Route("editdetail/{id}")]
+        public ActionResult EditDetail(GeneralCodeDetail GeneralCodeDetail)
+        {
+            var dbGeneralCodeDetail = _unitOfWork.GeneralCodeDetail.Find(p => p.Id == GeneralCodeDetail.Id);
+            if (dbGeneralCodeDetail != null)
+            {
+                dbGeneralCodeDetail.Group = GeneralCodeDetail.Group;
+                dbGeneralCodeDetail.Code = GeneralCodeDetail.Code;
+                dbGeneralCodeDetail.Description = GeneralCodeDetail.Description;
+                dbGeneralCodeDetail.Order = GeneralCodeDetail.Order;
+                dbGeneralCodeDetail.Active = GeneralCodeDetail.Active;
+
+
+                _unitOfWork.GeneralCodeDetail.Edit(dbGeneralCodeDetail);
+                _unitOfWork.Save();
+
+                return Ok(dbGeneralCodeDetail);
             }
 
             return NotFound();

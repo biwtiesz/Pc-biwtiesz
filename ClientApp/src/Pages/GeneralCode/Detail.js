@@ -11,21 +11,19 @@ function classNames(...classes) {
 }
 
 const Detail = () => {
-  const {id} = useParams()
+  const {group} = useParams()
   const navigate = useNavigate()
-  const [detail, setDetail] = useState([id ? null : {}])
+  const [detail, setDetail] = useState([group ? null : {}])
   const [language, setLanguage] = useState('th')
-  const [group, setGroup] = useState('')
-  const [description, setDescription] = useState('')
-  const [localDescription, setlocalDescription] = useState('')
   const [edit, setEdit] = useState('read')
-
+  console.log(group)
   useEffect(() => {
     axios
-      .get(`api/generalcode/search?id=${id}`)
+      .get(`api/generalcode/getGeneralCode?group=${group}`)
       .then(resp => setDetail(resp.data))
       .catch()
-  }, [id])
+  }, [group])
+
   const handleLanguageOnChange = event => {
     setLanguage(event.currentTarget.value)
   }
@@ -42,12 +40,12 @@ const Detail = () => {
 
   return (
     <div>
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow overflow-hidden sm:rounded-lg px-5 py-5">
         <Formik
           initialValues={{...detail}}
           onSubmit={values => {
-            const request = id
-              ? axios.patch(`api/generalcode/${id}`, {...values})
+            const request = detail.id
+              ? axios.patch(`api/generalcode/${detail.id}`, {...values})
               : axios.post('api/generalcode/create', {...values})
             request.then(resp => navigate('/generalcode')).catch()
           }}
@@ -179,7 +177,7 @@ const Detail = () => {
           </Form>
         </Formik>
 
-        <div className="border-t border-gray-200">
+        <div className="border-t border-gray-200 mt-5 rounded-md">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col">
               <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
@@ -208,6 +206,12 @@ const Detail = () => {
                             className="sticky top-0 z-10 hidden border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
                           >
                             Code Description
+                          </th>
+                          <th
+                            scope="col"
+                            className="sticky top-0 z-10 hidden border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
+                          >
+                            Active
                           </th>
                           <th
                             scope="col"
@@ -261,11 +265,21 @@ const Detail = () => {
                                   detailsIdx !== details.length - 1
                                     ? 'border-b border-gray-200'
                                     : '',
+                                  'whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden lg:table-cell',
+                                )}
+                              >
+                                {details.active ? '1' : '0'}
+                              </td>
+                              <td
+                                className={classNames(
+                                  detailsIdx !== details.length - 1
+                                    ? 'border-b border-gray-200'
+                                    : '',
                                   'relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6 lg:pr-8',
                                 )}
                               >
                                 <Link
-                                  to={`/GeneralCode/${details.group}/`}
+                                  to={`/GeneralCode/Edit/${details.id}`}
                                   className="text-orange-600 hover:text-orange-900"
                                 >
                                   Edit
@@ -288,7 +302,7 @@ const Detail = () => {
       <div className="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
         <div className="flex justify-end space-x-3">
           <Link
-            to="/GeneralCode"
+            to="/GeneralCode/"
             className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             Back

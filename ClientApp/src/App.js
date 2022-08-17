@@ -12,8 +12,9 @@ import Parameter from './pages/Parameter/Parameter'
 import ParameterDetail from './pages/Parameter/Detail'
 
 import GeneralCodeIndex from './pages/GeneralCode/GeneralCode'
-import GeneralDetail from './pages/GeneralCode/Detail'
-import GeneralDetailCreate from './pages/GeneralCode/Create'
+import GeneralCodeCreate from './pages/GeneralCode/Create'
+import GeneralCodeDetail from './pages/GeneralCode/Detail'
+import GeneralCodeDetailEdit from './pages/GeneralCode/Edit'
 
 const App = () => {
   return (
@@ -39,9 +40,10 @@ const App = () => {
 
           <Route path="GeneralCode" element={<Outlet />}>
             <Route index element={<GeneralCodeIndex />} />
-            <Route path=":id" element={<GeneralDetail />} />
-            <Route path=":group/:id" element={<GeneralDetail />} />
-            <Route path="Create" element={<GeneralDetailCreate />} />
+            <Route path=":id" element={<GeneralCodeDetail />} />
+            <Route path="Detail/:group" element={<GeneralCodeDetail />} />
+            <Route path="Edit/:id" element={<GeneralCodeDetailEdit />} />
+            <Route path="Create" element={<GeneralCodeCreate />} />
           </Route>
         </Route>
       </Routes>

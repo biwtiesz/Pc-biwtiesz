@@ -27,7 +27,7 @@ const GeneralCode = () => {
 
   return (
     <div>
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-red shadow overflow-hidden sm:rounded-lg px-5 py-5">
         <div className="flex justify-between items-center">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -126,7 +126,7 @@ const GeneralCode = () => {
                             )}
                           >
                             <Link
-                              to={`/GeneralCode/${generalCode.id}`}
+                              to={`/GeneralCode/Detail/${generalCode.group}`}
                               className="text-orange-600 hover:text-orange-900"
                             >
                               View

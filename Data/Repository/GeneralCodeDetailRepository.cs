@@ -13,7 +13,7 @@ namespace DigitalAppraisal.Data.Repository
         }
         public void Edit(GeneralCodeDetail GeneralCodeDetail)
         {
-            throw new NotImplementedException();
+            _context.GeneralCodeDetail.Update(GeneralCodeDetail);
         }
     }
 }
