@@ -16,7 +16,6 @@ const Detail = () => {
   const [detail, setDetail] = useState([group ? null : {}])
   const [language, setLanguage] = useState('th')
   const [edit, setEdit] = useState('read')
-  console.log(group)
   useEffect(() => {
     axios
       .get(`api/generalcode/getGeneralCode?group=${group}`)
@@ -35,6 +34,14 @@ const Detail = () => {
       setEdit('read')
     }
   }
+  const handleOnDelete = id => {
+    axios.delete(`api/generalcode/deletedetail/${id}`).then(resp => {
+      navigate('/')
+      setTimeout(() => {
+        navigate(`/GeneralCode/Detail/${group}`)
+      }, 1)
+    })
+  }
 
   if (!detail.generalCodeDetail) return <div>Loading...</div>
 
@@ -44,10 +51,14 @@ const Detail = () => {
         <Formik
           initialValues={{...detail}}
           onSubmit={values => {
-            const request = detail.id
-              ? axios.patch(`api/generalcode/${detail.id}`, {...values})
-              : axios.post('api/generalcode/create', {...values})
-            request.then(resp => navigate('/generalcode')).catch()
+            const request = axios.patch(`api/generalcode/${detail.id}`, {
+              ...values,
+            })
+            request
+              .then(resp => {
+                navigate('/generalcode')
+              })
+              .catch()
           }}
           validateOnBlur={false}
           validateOnChange={false}
@@ -176,8 +187,15 @@ const Detail = () => {
             )}
           </Form>
         </Formik>
-
-        <div className="border-t border-gray-200 mt-5 rounded-md">
+        <div className="flex justify-end px-4 py-5 sm:px-6">
+          <Link
+            to={`/GeneralCode/Create/detail`}
+            className="inline-flex rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+          >
+            Add General Code Detail
+          </Link>
+        </div>
+        <div className="border-t border-gray-200 rounded-md">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col">
               <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
@@ -287,6 +305,18 @@ const Detail = () => {
                                     , {details.group}
                                   </span>
                                 </Link>
+                                <span className="mx-3 align-text-bottom">
+                                  |
+                                </span>
+                                <button
+                                  className=" text-red-600 hover:text-red-900"
+                                  onClick={() => handleOnDelete(details.id)}
+                                >
+                                  Delete
+                                  <span className="sr-only">
+                                    , {details.description}
+                                  </span>
+                                </button>
                               </td>
                             </tr>
                           ))}

@@ -43,7 +43,7 @@ const App = () => {
             <Route path=":id" element={<GeneralCodeDetail />} />
             <Route path="Detail/:group" element={<GeneralCodeDetail />} />
             <Route path="Edit/:id" element={<GeneralCodeDetailEdit />} />
-            <Route path="Create" element={<GeneralCodeCreate />} />
+            <Route path="Create/:code" element={<GeneralCodeCreate />} />
           </Route>
         </Route>
       </Routes>

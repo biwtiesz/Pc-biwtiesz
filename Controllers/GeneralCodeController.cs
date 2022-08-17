@@ -65,10 +65,20 @@ namespace DigitalAppraisal.Controllers
 
 
         [HttpPost]
-        [Route("create")]
+        [Route("create/code")]
         public ActionResult Create(GeneralCode GeneralCode)
         {
             _unitOfWork.GeneralCode.Create(GeneralCode);
+            _unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("create/detail")]
+        public ActionResult CreateDetail(GeneralCodeDetail GeneralCodeDetail)
+        {
+            _unitOfWork.GeneralCodeDetail.Create(GeneralCodeDetail);
             _unitOfWork.Save();
 
             return Ok();
@@ -125,9 +135,28 @@ namespace DigitalAppraisal.Controllers
             var generalCode = _unitOfWork.GeneralCode.Find(p => p.Id == id);
             if (generalCode != null)
             {
+                var generalCodeDetail = _unitOfWork.GeneralCodeDetail.Find(p => p.Group == generalCode.Group);
+                if (generalCodeDetail != null)
+                {
+                    _unitOfWork.GeneralCodeDetail.Delete(generalCodeDetail);
+                }
                 _unitOfWork.GeneralCode.Delete(generalCode);
                 _unitOfWork.Save();
+                return Ok();
+            }
 
+            return NotFound();
+        }
+
+        [HttpDelete]
+        [Route("deletedetail/{id}")]
+        public ActionResult DeleteDetail(long id)
+        {
+            var generalCodeDetail = _unitOfWork.GeneralCodeDetail.Find(p => p.Id == id);
+            if (generalCodeDetail != null)
+            {
+                _unitOfWork.GeneralCodeDetail.Delete(generalCodeDetail);
+                _unitOfWork.Save();
                 return Ok();
             }
 

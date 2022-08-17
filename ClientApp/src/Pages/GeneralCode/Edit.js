@@ -16,10 +16,6 @@ const Edit = () => {
   const navigate = useNavigate()
   const [editDetail, setEditDetail] = useState(id ? null : {})
   const [edit, setEdit] = useState('read')
-  //   const [editDetail.active, setActiveToggle] = useState(
-  //     editDetail ? editDetail.active : 1,
-  //   )
-
   useEffect(() => {
     axios
       .get(`api/generalcode/getGeneralCodeDetail?id=${id}`)
@@ -36,7 +32,6 @@ const Edit = () => {
     }
   }
   if (!editDetail) return <div>Loading...</div>
-  console.log('render')
   return (
     <div>
       <div className="bg-white shadow overflow-hidden sm:rounded-lg px-5 py-5">
@@ -44,11 +39,12 @@ const Edit = () => {
           initialValues={{...editDetail}}
           onSubmit={values => {
             console.log(values)
-            const request = editDetail.id
-              ? axios.patch(`api/generalcode/editdetail/${editDetail.id}`, {
-                  ...values,
-                })
-              : axios.post('api/generalcode/create', {...values})
+            const request = axios.patch(
+              `api/generalcode/editdetail/${editDetail.id}`,
+              {
+                ...values,
+              },
+            )
             request
               .then(resp => navigate(`/GeneralCode/Detail/${editDetail.group}`))
               .catch()
@@ -69,63 +65,67 @@ const Edit = () => {
                     </p>
                   </div>
                   <div>
-                    <Switch
-                      checked={values.active}
-                      onChange={() => setFieldValue('active', !values.active)}
-                      className={classNames(
-                        values.active ? 'bg-orange-600' : 'bg-gray-200',
-                        'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500',
-                      )}
-                    >
-                      <span className="sr-only">Use setting</span>
-                      <span
+                    {edit == 'edit' ? (
+                      <Switch
+                        checked={values.active}
+                        onChange={() => setFieldValue('active', !values.active)}
                         className={classNames(
-                          values.active ? 'translate-x-5' : 'translate-x-0',
-                          'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+                          values.active ? 'bg-orange-600' : 'bg-gray-200',
+                          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500',
                         )}
                       >
+                        <span className="sr-only">Active</span>
                         <span
                           className={classNames(
-                            values.active
-                              ? 'opacity-0 ease-out duration-100'
-                              : 'opacity-100 ease-in duration-200',
-                            'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
+                            values.active ? 'translate-x-5' : 'translate-x-0',
+                            'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
                           )}
-                          aria-hidden="true"
                         >
-                          <svg
-                            className="h-3 w-3 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 12 12"
+                          <span
+                            className={classNames(
+                              values.active
+                                ? 'opacity-0 ease-out duration-100'
+                                : 'opacity-100 ease-in duration-200',
+                              'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
+                            )}
+                            aria-hidden="true"
                           >
-                            <path
-                              d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          className={classNames(
-                            values.active
-                              ? 'opacity-100 ease-in duration-200'
-                              : 'opacity-0 ease-out duration-100',
-                            'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
-                          )}
-                          aria-hidden="true"
-                        >
-                          <svg
-                            className="h-3 w-3 text-orange-600"
-                            fill="currentColor"
-                            viewBox="0 0 12 12"
+                            <svg
+                              className="h-3 w-3 text-gray-400"
+                              fill="none"
+                              viewBox="0 0 12 12"
+                            >
+                              <path
+                                d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            className={classNames(
+                              values.active
+                                ? 'opacity-100 ease-in duration-200'
+                                : 'opacity-0 ease-out duration-100',
+                              'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
+                            )}
+                            aria-hidden="true"
                           >
-                            <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                          </svg>
+                            <svg
+                              className="h-3 w-3 text-orange-600"
+                              fill="currentColor"
+                              viewBox="0 0 12 12"
+                            >
+                              <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+                            </svg>
+                          </span>
                         </span>
-                      </span>
-                    </Switch>
+                      </Switch>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
                 <div className="flex justify-center items-center">
@@ -201,7 +201,7 @@ const Edit = () => {
                         />
                       </div>
                     </div>
-                    <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                    <div className="bg-white  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Order
                       </dt>
@@ -214,29 +214,21 @@ const Edit = () => {
                         />
                       </div>
                     </div>
-                    <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Active
-                      </dt>
-                      <div className="col-span-2">
-                        {editDetail.active ? '1' : '0'}
-                      </div>
-                    </div>
                   </dl>
                 </div>
               ) : (
                 <div className="border-t border-gray-200">
                   <dl>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm font-medium text-gray-500 mb-7">
                         Group
                       </dt>
-                      <div className="text-sm text-gray-900 col-span-2 mb-8">
+                      <div className="text-sm text-gray-900 col-span-2 ">
                         {editDetail.group}
                       </div>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm font-medium text-gray-500 mb-7">
                         Code
                       </dt>
                       <div className="text-sm text-gray-900 col-span-2">
@@ -244,27 +236,19 @@ const Edit = () => {
                       </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm font-medium text-gray-500 mb-[115px]">
                         Description
                       </dt>
-                      <div className="text-sm text-gray-900 col-span-2 mb-[115px]">
+                      <div className="text-sm text-gray-900 col-span-2">
                         {editDetail.description}
                       </div>
                     </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500 mb-7">
                         Order
                       </dt>
                       <div className="text-sm text-gray-900 col-span-2">
                         {editDetail.order}
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Active
-                      </dt>
-                      <div className="text-sm text-gray-900 col-span-2">
-                        {editDetail.active ? '1' : '0'}
                       </div>
                     </div>
                   </dl>

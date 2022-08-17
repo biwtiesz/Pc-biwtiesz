@@ -98,7 +98,7 @@ const Parameter = () => {
                           >
                             <Link
                               to={`/${parameterjson.name}/`}
-                              className="text-indigo-600 hover:text-indigo-900"
+                              className="text-orange-600 hover:text-orange-900"
                             >
                               View
                               <span className="sr-only">
