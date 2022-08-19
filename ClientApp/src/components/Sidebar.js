@@ -36,7 +36,7 @@ const navigation = [
 ]
 
 const teams = [
-  {name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500'},
+  {name: 'Engineering', href: '#', bgColorClass: 'bg-orange-500'},
   {name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500'},
   {name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500'},
 ]
@@ -343,7 +343,7 @@ const Sidebar = () => {
                 type="text"
                 name="search"
                 id="search"
-                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
+                className="focus:ring-orange-500 focus:border-orange-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
                 placeholder="Search"
               />
             </div>
