@@ -104,7 +104,7 @@ const Sidebar = () => {
                 </Transition.Child>
                 <div className="flex-shrink-0 flex items-center px-4">
                   <div class="text-3xl font-extrabold ...">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-red-500">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-orange-500">
                       D-APP
                     </span>
                   </div>
@@ -177,7 +177,7 @@ const Sidebar = () => {
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100">
+      <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-[#fcfcfc]">
         <div className="flex items-center flex-shrink-0 px-6">
           <div class="text-3xl font-extrabold ...">
             <span class="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-red-400">
@@ -357,7 +357,7 @@ const Sidebar = () => {
                   to={item.href}
                   className={classNames(
                     item.href === location.pathname
-                      ? 'bg-gray-200 text-gray-900'
+                      ? 'bg-[#faf2d7] text-[#e7b24d]'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                     'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                   )}
@@ -366,7 +366,7 @@ const Sidebar = () => {
                   <item.icon
                     className={classNames(
                       item.href === location.pathname
-                        ? 'text-gray-500'
+                        ? 'text-[#e7b24d]'
                         : 'text-gray-400 group-hover:text-gray-500',
                       'mr-3 flex-shrink-0 h-6 w-6',
                     )}
