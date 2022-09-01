@@ -70,8 +70,8 @@ const Edit = () => {
                         checked={values.active}
                         onChange={() => setFieldValue('active', !values.active)}
                         className={classNames(
-                          values.active ? 'bg-orange-600' : 'bg-gray-200',
-                          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500',
+                          values.active ? 'bg-blue-600' : 'bg-gray-200',
+                          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
                         )}
                       >
                         <span className="sr-only">Active</span>
@@ -114,7 +114,7 @@ const Edit = () => {
                             aria-hidden="true"
                           >
                             <svg
-                              className="h-3 w-3 text-orange-600"
+                              className="h-3 w-3 text-blue-600"
                               fill="currentColor"
                               viewBox="0 0 12 12"
                             >
@@ -134,7 +134,7 @@ const Edit = () => {
                       {edit == 'edit' ? (
                         <button
                           onClick={setEdits}
-                          className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                          className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                           Cancel
                         </button>
@@ -144,14 +144,14 @@ const Edit = () => {
                       {edit == 'edit' ? (
                         <button
                           type="submit"
-                          className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                           Save
                         </button>
                       ) : (
                         <button
                           onClick={setEdits}
-                          className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                           Edit
                         </button>
@@ -262,7 +262,7 @@ const Edit = () => {
         <div className="flex justify-end space-x-3">
           <Link
             to={`/GeneralCode/Detail/${editDetail.group}`}
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Back
           </Link>

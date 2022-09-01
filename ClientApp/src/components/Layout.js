@@ -16,7 +16,7 @@ const Layout = ({children}) => {
       <div className="min-h-full ">
         <div
           style={{width: `${completion}%`}}
-          className="bg-[#e7b24d] h-1 top-0 sticky z-50"
+          className="bg-blue-600 h-1 top-0 sticky z-50"
         />
         <Sidebar />
         <div className="lg:pl-64 flex flex-col">

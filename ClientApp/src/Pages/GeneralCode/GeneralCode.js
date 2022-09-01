@@ -38,7 +38,7 @@ const GeneralCode = () => {
           <div className="px-4 py-5 sm:px-6">
             <Link
               to="/GeneralCode/Create/code"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#e7b24d] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
             >
               Add General Code
             </Link>
@@ -127,7 +127,7 @@ const GeneralCode = () => {
                           >
                             <Link
                               to={`/GeneralCode/Detail/${generalCode.group}`}
-                              className="text-orange-600 hover:text-orange-900"
+                              className="text-blue-600 hover:text-blue-900"
                             >
                               View
                               <span className="sr-only">
@@ -137,7 +137,7 @@ const GeneralCode = () => {
                             <span className="mx-3 align-text-bottom">|</span>
                             {/* <Link
                               to={`/GeneralCode/${generalCode.id}`}
-                              className="text-orange-600 hover:text-orange-900"
+                              className="text-blue-600 hover:text-blue-900"
                             >
                               Edit
                               <span className="sr-only">
@@ -169,7 +169,7 @@ const GeneralCode = () => {
         <div className="flex justify-end space-x-3">
           <Link
             to="/Parameter"
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Back
           </Link>

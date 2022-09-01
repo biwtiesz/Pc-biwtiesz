@@ -79,7 +79,7 @@ const Detail = () => {
                     {edit == 'edit' ? (
                       <button
                         onClick={setEdits}
-                        className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                        className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       >
                         Cancel
                       </button>
@@ -89,14 +89,14 @@ const Detail = () => {
                     {edit == 'edit' ? (
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       >
                         Save
                       </button>
                     ) : (
                       <button
                         onClick={setEdits}
-                        className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       >
                         Edit
                       </button>
@@ -108,7 +108,7 @@ const Detail = () => {
                     id="language"
                     name="language"
                     autoComplete="language"
-                    className="shadow-sm focus:ring-orange-500 focus:border-orange-500 block sm:text-sm border-gray-300 rounded-md w-full"
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md w-full"
                     onChange={handleLanguageOnChange}
                   >
                     <option value="th">TH</option>
@@ -189,8 +189,8 @@ const Detail = () => {
         </Formik>
         <div className="flex justify-end px-4 py-5 sm:px-6">
           <Link
-            to={`/GeneralCode/Create/detail`}
-            className="inline-flex rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+            to={`/GeneralCode/Create/detail/${group}`}
+            className="inline-flex rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
           >
             Add General Code Detail
           </Link>
@@ -298,7 +298,7 @@ const Detail = () => {
                               >
                                 <Link
                                   to={`/GeneralCode/Edit/${details.id}`}
-                                  className="text-orange-600 hover:text-orange-900"
+                                  className="text-blue-600 hover:text-blue-900"
                                 >
                                   Edit
                                   <span className="sr-only">
@@ -333,7 +333,7 @@ const Detail = () => {
         <div className="flex justify-end space-x-3">
           <Link
             to="/GeneralCode/"
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Back
           </Link>

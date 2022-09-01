@@ -9,7 +9,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const Create = () => {
-  const {code} = useParams()
+  const {code, group} = useParams()
   const navigate = useNavigate()
   if (code == 'code') {
     return (
@@ -75,13 +75,13 @@ const Create = () => {
             <div className="flex justify-end space-x-3">
               <Link
                 to="/GeneralCode"
-                className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 Create
               </button>
@@ -94,18 +94,18 @@ const Create = () => {
     return (
       <Formik
         initialValues={{
-          group: '',
+          group: group,
           code: '',
           description: '',
           order: '',
-          language: '',
+          language: 'TH',
           active: true,
         }}
         onSubmit={values => {
           const request = axios.post('api/generalcode/create/detail', {
             ...values,
           })
-          request.then(resp => navigate('/generalcode')).catch()
+          request.then(resp => navigate(`/GeneralCode/Detail/${group}`)).catch()
         }}
         validateOnBlur={false}
         validateOnChange={false}
@@ -127,8 +127,8 @@ const Create = () => {
                     checked={values.active}
                     onChange={() => setFieldValue('active', !values.active)}
                     className={classNames(
-                      values.active ? 'bg-orange-600' : 'bg-gray-200',
-                      'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500',
+                      values.active ? 'bg-blue-600' : 'bg-gray-200',
+                      'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
                     )}
                   >
                     <span className="sr-only">Active</span>
@@ -171,7 +171,7 @@ const Create = () => {
                         aria-hidden="true"
                       >
                         <svg
-                          className="h-3 w-3 text-orange-600"
+                          className="h-3 w-3 text-blue-600"
                           fill="currentColor"
                           viewBox="0 0 12 12"
                         >
@@ -185,7 +185,24 @@ const Create = () => {
 
               <div className="border-t border-gray-200">
                 <dl>
-                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Language
+                    </dt>
+                    <div className="col-span-1">
+                      <Dropdown
+                        id="language"
+                        name="language"
+                        as="select"
+                        items={[
+                          {value: 'th', text: 'TH'},
+                          {value: 'en', text: 'EN'},
+                        ]}
+                        className="w-[100px]"
+                      />
+                    </div>
+                  </div>
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">Group</dt>
                     <Input
                       id="group"
@@ -194,7 +211,7 @@ const Create = () => {
                       className="bg-gray-900"
                     />
                   </div>
-                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">Code</dt>
                     <div className="col-span-1">
                       <Input
@@ -205,7 +222,7 @@ const Create = () => {
                       />
                     </div>
                   </div>
-                  <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-white  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Description
                     </dt>
@@ -218,26 +235,13 @@ const Create = () => {
                       />
                     </div>
                   </div>
-                  <div className="bg-white  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                  <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">Order</dt>
                     <div className="col-span-1">
                       <Input
                         id="order"
                         name="order"
                         type="number"
-                        className="bg-gray-900"
-                      />
-                    </div>
-                  </div>
-                  <div className="bg-gray-50  px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                    <dt className="text-sm font-medium text-gray-500">
-                      Language
-                    </dt>
-                    <div className="col-span-1">
-                      <Input
-                        id="language"
-                        name="language"
-                        type="text"
                         className="bg-gray-900"
                       />
                     </div>
@@ -249,13 +253,13 @@ const Create = () => {
               <div className="flex justify-end space-x-3">
                 <Link
                   to="/GeneralCode"
-                  className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                  className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Cancel
                 </Link>
                 <button
                   type="submit"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Create
                 </button>

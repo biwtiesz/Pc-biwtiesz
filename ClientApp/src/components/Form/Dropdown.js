@@ -1,6 +1,14 @@
 import {Field} from 'formik'
 
-const Dropdown = ({label, name, value, error, items = [], showRemarkIf}) => {
+const Dropdown = ({
+  label,
+  name,
+  value,
+  error,
+  items = [],
+  showRemarkIf,
+  className,
+}) => {
   return (
     <>
       <div className="mt-1 relative">
@@ -17,7 +25,9 @@ const Dropdown = ({label, name, value, error, items = [], showRemarkIf}) => {
           className={
             error
               ? 'p-3 shadow-sm ring-1 ring-red-500 border-red-500 focus:ring-red-500 focus:border-red-500 block w-full sm:text-sm  rounded-md'
-              : 'p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+              : 'p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md' +
+                ' ' +
+                className
           }
         >
           {items.map(i =>
